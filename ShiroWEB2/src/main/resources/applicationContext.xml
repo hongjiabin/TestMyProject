@@ -46,6 +46,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	
 	<!-- 自定义Realm -->
 	<bean id="myRealm" class="com.shiroweb.realm.MyRealm"/>  
 	
@@ -59,13 +60,20 @@
 	    <!-- Shiro的核心安全接口,这个属性是必须的 -->  
 	    <property name="securityManager" ref="securityManager"/>
 	    <!-- 身份认证失败，则跳转到登录页面的配置 -->  
-	    <property name="loginUrl" value="/index.jsp"/>
+	    <property name="loginUrl" value="/login.jsp"/>
+	    <!-- 身份认证失败，则跳转到登录页面的配置 --> 
+	    <property name="successUrl" value="/index.jsp"/>  
 	    <!-- 权限认证失败，则跳转到指定页面 -->  
-	    <property name="unauthorizedUrl" value="/"/>  
+	    <property name="unauthorizedUrl" value="/login.jsp"/>  
 	    <!-- Shiro连接约束配置,即过滤链的定义 -->  
 	    <property name="filterChainDefinitions">  
 	        <value>  
 	            /login=anon
+	            /css/*=anon
+	            /fonts/*=anon
+	            /img/*=anon
+	            /js/*=anon
+	            /plugins/*=anon
 				/admin*=authc
 				/student=roles[teacher]
 				/teacher=perms["user:create"]
